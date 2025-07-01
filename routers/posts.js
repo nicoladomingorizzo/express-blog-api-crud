@@ -1,10 +1,14 @@
 const posts = require('../data/posts');
 const express = require('express');
-const app = express();
+const router = express();
 
 //index
 router.get('/', (req, res) => {
-    res.json(posts);
+    let filteredPosts = posts;
+    if (req.query.tag) {
+        filteredPosts = posts.filter(p => p.tags.includes(req.query.tag));
+    };
+    res.json(filteredPosts);
 });
 
 //show
@@ -41,3 +45,5 @@ router.delete('/:id', (req, res) => {
     //rest con status 204
     res.status(204);
 });
+
+module.exports = router;
