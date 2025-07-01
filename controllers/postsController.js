@@ -13,7 +13,6 @@ function index(req, res) {
 function show(req, res) {
     const id = parseInt(req.params.id);
     const detailPost = posts.find(p => p.id === id);
-    res.json(detailPost);
     //se non trovasse il prodotto
     if (!detailPost) {
         // Imposto lo status 404 e restituisco un JSON con le altre informazioni
@@ -22,6 +21,7 @@ function show(req, res) {
             message: "Prodotto non trovato"
         });
     };
+    res.json(detailPost);
 };
 
 //funzione destroy
