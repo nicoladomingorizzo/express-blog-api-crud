@@ -37,7 +37,7 @@ function destroy(req, res) {
         });
     };
     //slice per eliminare post
-    posts.splice(posts.indexOf(p), 1);
+    posts.splice(posts.indexOf(detailPost), 1);
     //log lista posts aggiornata
     console.log(posts);
     //rest con status 204
