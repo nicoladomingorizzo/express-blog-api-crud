@@ -38,6 +38,8 @@ function store(req, res) {
     };
     //controllo con un log il prodotto nuovo quando lo invio
     console.log(newPostObj);
+    //pusho nell'array di posts
+    posts.push(newPostObj);
     //provide status 201
     res.sendStatus(201);
     //restituisco ciò che ho creato
