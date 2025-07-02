@@ -32,6 +32,7 @@ function store(req, res) {
     //costruisco l'oggetto prendendo i dati da req.body
     const newPostObj = {
         id: newPostId,
+        title: req.body.title,
         content: req.body.content,
         image: req.body.image,
         tags: req.body.tags
@@ -41,9 +42,31 @@ function store(req, res) {
     //pusho nell'array di posts
     posts.push(newPostObj);
     //provide status 201
-    res.sendStatus(201);
     //restituisco ciò che ho creato
-    res.json(newPostObj);
+    res.status(201).json(newPostObj);
+};
+
+//update
+function update(req, res) {
+    const id = parseInt(req.params.id);
+    const detailPost = posts.find(p => p.id === id);
+    //se non trovasse il prodotto
+    if (!detailPost) {
+        // Imposto lo status 404 e restituisco un JSON con le altre informazioni
+        return res.status(404).json({
+            error: "Not Found",
+            message: "Prodotto non trovato"
+        });
+    };
+    //recupero le i valori dalla req.body
+    detailPost.title = req.body.title;
+    detailPost.content = req.body.content;
+    detailPost.image = req.body.image;
+    detailPost.tags = req.body.tags;
+    //faccio un console log dell'array modificata
+    console.log(posts);
+    //restituisco ciò che ho modificato
+    res.json(detailPost);
 };
 
 //funzione destroy
@@ -67,4 +90,4 @@ function destroy(req, res) {
 };
 
 
-module.exports = { index, show, store, destroy };
+module.exports = { index, show, store, update, destroy };
