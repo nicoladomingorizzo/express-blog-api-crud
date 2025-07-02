@@ -24,6 +24,26 @@ function show(req, res) {
     res.json(detailPost);
 };
 
+//store
+function store(req, res) {
+    console.log(req.body);
+    //creo un id univoco prendendo come riferimento la lunghezza dell'array
+    const newPostId = posts[posts.length - 1].id + 1;
+    //costruisco l'oggetto prendendo i dati da req.body
+    const newPostObj = {
+        id: newPostId,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+    //controllo con un log il prodotto nuovo quando lo invio
+    console.log(newPostObj);
+    //provide status 201
+    res.sendStatus(201);
+    //restituisco ciò che ho creato
+    res.json(newPostObj);
+};
+
 //funzione destroy
 function destroy(req, res) {
     const id = parseInt(req.params.id);
@@ -45,4 +65,4 @@ function destroy(req, res) {
 };
 
 
-module.exports = { index, show, destroy };
+module.exports = { index, show, store, destroy };
