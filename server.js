@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3020;
 const postsRouters = require('./routers/posts');
-const handleServerError = require('./middlewares/handleServerError')
+const handleServerError = require('./middlewares/handleServerError');
+const notFoundError = require('./middlewares/notFoundError');
 
 app.use(express.json());
 
@@ -20,3 +21,4 @@ app.listen(port, () => {
 });
 
 app.use(handleServerError);
+app.use(notFoundError);
