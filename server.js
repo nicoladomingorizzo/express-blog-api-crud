@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3020;
 const postsRouters = require('./routers/posts');
+const handleServerError = require('./middlewares/handleServerError')
 
 app.use(express.json());
 
@@ -17,3 +18,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is listening on port http://localhost:${port}`);
 });
+
+app.use(handleServerError);
