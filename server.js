@@ -20,5 +20,8 @@ app.listen(port, () => {
     console.log(`Server is listening on port http://localhost:${port}`);
 });
 
+//middleware server error 500
 app.use(handleServerError);
+
+//middleware client error 404
 app.use(notFoundError);
